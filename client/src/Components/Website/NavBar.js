@@ -1,7 +1,7 @@
 import Logo from '../../images/logo.png'
 export default function NavBar(){
     return(
-        <header className="sticky top-0 bg-white shadow-md z-50">
+        <header className="fixed w-full top-0 bg-white shadow-md z-50">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-1 w-full">
           {/* Search Bar */}
@@ -37,7 +37,11 @@ export default function NavBar(){
       {/* Header Bottom */}
       <div className=" py-4">
         <div className="container mx-auto flex items-center justify-center px-4">
-          <button className="bg-blue-500 text-white px-4 py-2 rounded w-1/6">Shop By Categories</button>
+          <button className="bg-primaryColor flex justify-between items-center text-white px-4 py-2 rounded w-1/6">
+          <div></div>
+          <p>Shop By Categories</p>
+          <span class="mdi mdi-arrow-down-drop-circle"></span>
+          </button>
           <nav className="hidden md:flex space-x-6 w-2/3 pl-8">
             <a href="#" className="text-gray-700 hover:text-blue-500">Home</a>
             <a href="#" className="text-gray-700 hover:text-blue-500">Electronics</a>
