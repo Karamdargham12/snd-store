@@ -75,8 +75,11 @@ export default function Register() {
                   />
                 </div>
                 <div className="w-full mt-8">
-                  <div className="flex justify-center">
-                    <button className="w-1/2 h-10 bg-primaryColor  rounded-lg text-white font-semibold">
+                <div className="flex justify-center">
+                    <button
+                      type="submit"
+                      className="w-1/2 bg-primaryColor rounded p-2 font-semibold text-white"
+                    >
                       Submit
                     </button>
                   </div>
