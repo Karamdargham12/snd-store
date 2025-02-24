@@ -4,12 +4,45 @@ import NavBar from "../../Components/Website/NavBar";
 import registerImg from "../../images/Register.jpg";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import axios from "axios";
 
 export default function Register() {
   const [phone, setPhone] = useState("");
+  const [loading,setLoading] = useState(false)
+  const [userData,setUserData] = useState({
+    name:"",
+    email:"",
+    password:"",
+    location:"",
+    phone:""
+  })
+  function fillForm(e){
+    const name = e.target.name
+    const value = e.target.value
+    setUserData({...userData,[name]:value})
+}
+async function formSubmit(e){
+  e.preventDefault();
+  setLoading(true);
 
+  const finalUserData = {
+    ...userData,
+    phone: phone 
+  };
+
+  try {
+    const response = await axios.post("http://localhost:5000/auth/register", finalUserData,{
+      headers: { "Content-Type": "application/json" }
+    });
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
+}
   return (
-    <div className="scroll-bar bg-white">
+   loading?<p>Loading....</p> :<div className="scroll-bar bg-white">
       <div className="hidden md:block">
         <NavBar />
       </div>
@@ -25,7 +58,7 @@ export default function Register() {
               alt="Register"
             />
           </div>
-          <form className="lg:col-span-5 col-span-12 lg:col-start-8 pt-10 mt-3 lg:mt-0 bg-gray-700/60 lg:rounded-l-[6rem] lg:rounded-tr-none rounded-t-xl">
+          <form onSubmit={formSubmit} className="lg:col-span-5 col-span-12 lg:col-start-8 pt-10 mt-3 lg:mt-0 bg-gray-700/60 lg:rounded-l-[6rem] lg:rounded-tr-none rounded-t-xl">
             <div className="w-full flex justify-center items-center">
               <div className="w-3/4">
                 <h1 className="text-4xl text-center text-white font-extrabold">
@@ -36,7 +69,10 @@ export default function Register() {
                   <input
                     className="border-primaryColor border-10 rounded-md w-full h-9 outline-none"
                     type="text"
+                    name="name"
                     placeholder="Name"
+                    onChange={fillForm}
+                    required
                   />
                 </div>
                 <div className="input-box mt-8 flex items-center border-2 gap-x-2 bg-white">
@@ -44,7 +80,10 @@ export default function Register() {
                   <input
                     className="border-primaryColor border-10 rounded-md w-full h-9 outline-none"
                     type="email"
+                    name="email"
                     placeholder="Email"
+                    onChange={fillForm}
+                    required
                   />
                 </div>
                 <div className="input-box mt-8 flex items-center border-2 gap-x-2 bg-white">
@@ -52,7 +91,10 @@ export default function Register() {
                   <input
                     className="border-primaryColor border-10 rounded-md w-full h-9 outline-none"
                     type="password"
+                    name="password"
                     placeholder="Password"
+                    onChange={fillForm}
+                    required
                   />
                 </div>
                 <div className="input-box mt-8 flex flex-col">
@@ -71,6 +113,9 @@ export default function Register() {
                   <input
                     className="border-primaryColor border-10 rounded-md w-full h-9 outline-none"
                     type="text"
+                    name="location"
+                    required
+                    onChange={fillForm}
                     placeholder="Location"
                   />
                 </div>

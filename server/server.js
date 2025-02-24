@@ -11,6 +11,7 @@ app.use(cors({
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
+app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.get("/",(req,res)=>{
