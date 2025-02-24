@@ -22,7 +22,7 @@ export default function Login() {
               alt="Register"
             />
           </div>
-          <form className="lg:col-span-5 col-span-12 lg:col-start-8 pt-10 mt-3 lg:mt-0 bg-gray-700/60 lg:rounded-l-[6rem] lg:rounded-tr-none rounded-t-xl">
+          <form className="lg:col-span-5 col-span-12 lg:col-start-8 pt-16 mt-8 lg:h-full h-4/6 lg:mt-0 bg-gray-700/60 lg:rounded-l-[6rem] lg:rounded-tr-none rounded-t-xl">
             <div className="w-full flex justify-center items-center">
               <div className="w-3/4">
                 <h1 className="text-4xl text-center text-white font-extrabold">
@@ -45,7 +45,7 @@ export default function Login() {
                     placeholder="Password"
                   />
                 </div>
-                  <div className="remember-forget pt-8 pl-2 flex justify-between">
+                  <div className="remember-forget pt-8 pl-2 lg:flex justify-between">
                     <div className="flex gap-x-1">
                       <input type="checkbox" className="pl-2" />
                       <label className="text-gray-300">Remember me</label>

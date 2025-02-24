@@ -8,7 +8,6 @@ const userSchema = new Schema({
     role: { type: String, enum: ['admin','customer'], required: true },
     location: { type: String, required: true },
     phone: { type: String, required: true },
-    imageUrl: { type: String },
 });
 
 module.exports = mongoose.model('User', userSchema);
