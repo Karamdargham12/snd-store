@@ -8,7 +8,7 @@ export default function NavBar(){
           <div className="flex items-center overflow-hidden justify-center gap-x-8 w-2/3">
           <div className="pr-3">
           <a href="index.html">
-              <img src={Logo} alt="Ecom" className="h-16 w-[70px]" />
+              <img src={Logo} alt="Ecom" className="h-12 w-[50px]" />
             </a>
           </div>
             <input

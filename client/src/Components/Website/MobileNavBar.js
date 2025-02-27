@@ -4,9 +4,9 @@ import Logo from "../../images/logo.png"
 export default function MobileNavBar(){
    const [menuOpen,setMenuOpen] = useState(false)  
    return  <div className="md:hidden fixed top-0 w-full bg-white shadow-md z-50">
-      <div className="container mx-auto px-4 md:py-4 py-0 flex items-center justify-between">
+      <div className="container mx-auto px-4 md:py-4 py-2 flex items-center justify-between">
         <a href="index.html">
-          <img src={Logo} alt="Ecom" className="h-14 w-14" />
+          <img src={Logo} alt="Ecom" className="h-10 w-10" />
         </a>
         <button className="text-gray-700 focus:outline-none" onClick={()=>setMenuOpen((prev)=> !prev)}>☰</button>
       </div>
