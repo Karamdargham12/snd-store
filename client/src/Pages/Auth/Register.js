@@ -5,6 +5,7 @@ import registerImg from "../../images/Register.jpg";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [phone, setPhone] = useState("");
@@ -16,6 +17,7 @@ export default function Register() {
     location:"",
     phone:""
   })
+  const nav=useNavigate()
   function fillForm(e){
     const name = e.target.name
     const value = e.target.value
@@ -34,9 +36,9 @@ async function formSubmit(e){
     const response = await axios.post("http://localhost:5000/auth/register", finalUserData,{
       headers: { "Content-Type": "application/json" }
     });
-    console.log(response);
+    nav("/")
   } catch (error) {
-    console.log(error);
+    
   } finally {
     setLoading(false);
   }

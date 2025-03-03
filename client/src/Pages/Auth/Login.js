@@ -1,12 +1,42 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MobileNavBar from "../../Components/Website/MobileNavBar";
 import NavBar from "../../Components/Website/NavBar";
 import loginImg from "../../images/login.jpg";
 import "react-phone-input-2/lib/style.css";
+import { useState } from "react";
+import axios from "axios";
 
 export default function Login() {
+  const [userData,setUserData] =useState({
+  email:"",
+  password:""
+  })
+  const [error,setError]=useState(false)
+  const [loading,setLoading] =useState(false)
+  const nav = useNavigate()
+  function fillForm(e){
+const name=e.target.name
+const value=e.target.value
+setUserData({...userData,[name]:value})
+  }
+
+ async function submit(e){
+ e.preventDefault()
+setLoading(true)
+try{
+  const res= await axios.post("http://localhost:5000/auth/login",userData)
+  nav("/")
+}
+catch(err){
+setError(true)
+}
+finally{
+  setLoading(false)
+}
+  }
+  
   return (
-    <div className="scroll-bar bg-white">
+    loading?<h1>loading</h1>: <div className="scroll-bar bg-white">
       <div className="hidden md:block">
         <NavBar />
       </div>
@@ -22,7 +52,7 @@ export default function Login() {
               alt="Register"
             />
           </div>
-          <form className="lg:col-span-5 col-span-12 lg:col-start-8 pt-16 mt-8 lg:h-full h-4/6 lg:mt-0 bg-gray-700/60 lg:rounded-l-[6rem] lg:rounded-tr-none rounded-t-xl">
+          <form onSubmit={submit} className="lg:col-span-5 col-span-12 lg:col-start-8 pt-16 mt-8 lg:h-full h-4/6 lg:mt-0 bg-gray-700/60 lg:rounded-l-[6rem] lg:rounded-tr-none rounded-t-xl">
             <div className="w-full flex justify-center items-center">
               <div className="w-3/4">
                 <h1 className="text-4xl text-center text-white font-extrabold">
@@ -35,6 +65,9 @@ export default function Login() {
                     className="border-primaryColor border-10 rounded-md w-full h-9 outline-none"
                     type="email"
                     placeholder="Email"
+                    required
+                    name="email"
+                    onChange={fillForm}
                   />
                 </div>
                 <div className="input-box mt-8 flex items-center border-2 gap-x-2 bg-white">
@@ -43,11 +76,15 @@ export default function Login() {
                     className="border-primaryColor border-10 rounded-md w-full h-9 outline-none"
                     type="password"
                     placeholder="Password"
+                    required
+                    name="password"
+                    onChange={fillForm}
                   />
                 </div>
+                {error &&<p className="pt-4 text-center text-red-600 font-bold">Invalid Email or Password</p>}
                   <div className="remember-forget pt-8 pl-2 lg:flex justify-between">
                     <div className="flex gap-x-1">
-                      <input type="checkbox" className="pl-2" />
+                      <input type="checkbox" className="pl-2"  />
                       <label className="text-gray-300">Remember me</label>
                     </div>
                     <Link to="/fogetpassword" className="text-gray-300">
