@@ -5,6 +5,8 @@ import './App.css'
 import Login from "./Pages/Auth/Login"
 import Register from './Pages/Auth/Register';
 import Dashboard from './Pages/Dashboard/Dashboard';
+import Products from './Pages/Dashboard/Products';
+import Accounts from './Pages/Dashboard/Accounts';
 
 function App() {
   return (
@@ -12,7 +14,11 @@ function App() {
      <Route path="/" element={<HomePage />} />
      <Route path="/register" element={<Register />} />
      <Route path="/login" element={<Login />} />
-     <Route path="/dashboard" element={<Dashboard />} />
+     <Route path="/dashboard" element={<Dashboard />} >
+      <Route path="products" element={<Products/>}/>
+      <Route path="accounts" element={<Accounts/>}/>
+     </Route>
+
     </Routes>
   );
 }

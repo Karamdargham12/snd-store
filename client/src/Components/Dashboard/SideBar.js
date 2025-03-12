@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function SideBar(){
     const [isMinimized, setIsMinimized] = useState(false);
@@ -18,14 +19,14 @@ export default function SideBar(){
       <nav>
         <ul className="space-y-1">
           <li>
-            <a href="index.html" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">
+            <Link to="/" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">
               <span className="mdi mdi-home text-lg mr-3"></span> <span className={`${isMinimized ? 'hidden' : 'inline'}`}>Dashboard</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="page-products-list.html" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">
+            <Link to="/dashboard/products" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">
               <span className="mdi mdi-shopping text-lg mr-3"></span> <span className={`${isMinimized ? 'hidden' : 'inline'}`}>Products</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a href="page-orders-1.html" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">
@@ -43,9 +44,9 @@ export default function SideBar(){
             </a>
           </li>
           <li>
-            <a href="page-account-login.html" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">
-              <span className="mdi mdi-account text-lg mr-3"></span> <span className={`${isMinimized ? 'hidden' : 'inline'}`}>Account</span>
-            </a>
+            <Link to="/dashboard/accounts" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">
+              <span className="mdi mdi-account text-lg mr-3"></span> <span className={`${isMinimized ? 'hidden' : 'inline'}`}>Accounts</span>
+            </Link>
           </li>
           <li>
             <a href="page-reviews.html" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">
