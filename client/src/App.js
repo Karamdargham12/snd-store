@@ -18,7 +18,6 @@ function App() {
       <Route path="products" element={<Products/>}/>
       <Route path="accounts" element={<Accounts/>}/>
      </Route>
-
     </Routes>
   );
 }
