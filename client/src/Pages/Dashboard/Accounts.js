@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import Cookie from "cookie-universal"
 
 export default function Accounts(){
     const [users,setUsers] = useState([])
@@ -18,8 +19,9 @@ export default function Accounts(){
         }
 
       }
+    
     useEffect(()=>{
-       getUsers()
+       getUsers()   
     },[])
     return(
        loading ? <p>loading...</p> : <div>

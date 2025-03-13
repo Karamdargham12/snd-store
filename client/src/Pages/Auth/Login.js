@@ -5,7 +5,6 @@ import loginImg from "../../images/login.jpg";
 import "react-phone-input-2/lib/style.css";
 import { useState } from "react";
 import axios from "axios";
-
 export default function Login() {
   const [userData,setUserData] =useState({
   email:"",
@@ -19,12 +18,13 @@ const name=e.target.name
 const value=e.target.value
 setUserData({...userData,[name]:value})
   }
-
+ 
  async function submit(e){
  e.preventDefault()
 setLoading(true)
 try{
   const res= await axios.post("http://localhost:5000/auth/login",userData)
+  console.log(res.data)
   nav("/")
 }
 catch(err){
