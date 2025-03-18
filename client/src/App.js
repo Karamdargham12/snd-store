@@ -7,6 +7,7 @@ import Register from './Pages/Auth/Register';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Products from './Pages/Dashboard/Products';
 import Accounts from './Pages/Dashboard/Accounts';
+import RequireAuth from './Pages/Auth/RequireAuth'
 
 function App() {
   return (
@@ -17,9 +18,11 @@ function App() {
      <Route path="/login" element={<Login />} />
 
      // Protected Routes
+     <Route element={<RequireAuth/>} >
      <Route path="/dashboard" element={<Dashboard />} >
       <Route path="products" element={<Products/>}/>
       <Route path="accounts" element={<Accounts/>}/>
+     </Route>
      </Route>
     </Routes>
   );

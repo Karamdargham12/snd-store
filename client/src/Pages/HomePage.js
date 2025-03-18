@@ -2,7 +2,11 @@ import MobileNavBar from "../Components/Website/MobileNavBar";
 import NavBar from "../Components/Website/NavBar";
 import "swiper/css";
 import Header1 from '../images/Hero.jpg'
+import { useContext } from "react";
+import { User } from "../Context/UserContext";
 export default function HomePage(){
+  const context = useContext(User)
+  var aya = "jsaoidjsa"
     return(
         <div className="scroll-bar">
           <div className="hidden md:block">
