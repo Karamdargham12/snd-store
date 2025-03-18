@@ -11,7 +11,7 @@ export default function SideBar(){
   return (
     <aside className={`bg-white shadow-md h-screen p-4 border-r border-gray-200 transition-all duration-300 ${isMinimized ? 'w-20' : 'w-64'}`}>
       <div className="mb-6 flex justify-between items-center">
-        <a href="index.html" className={`text-2xl font-bold text-gray-700 transition-opacity duration-300 ${isMinimized ? 'hidden' : 'block'}`}>Ecom Dashboard</a>
+        <a href="index.html" className={`text-2xl font-bold text-gray-700 transition-opacity duration-300 ${isMinimized ? 'hidden' : 'block'}`}>SND Shop</a>
         <button onClick={toggleSidebar} className="btn btn-icon btn-aside-minimize">
           <span className="mdi mdi-menu-open text-gray-500"></span>
         </button>
