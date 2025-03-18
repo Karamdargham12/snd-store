@@ -5,6 +5,7 @@ import loginImg from "../../images/login.jpg";
 import "react-phone-input-2/lib/style.css";
 import { useState } from "react";
 import axios from "axios";
+import Cookie from "cookie-universal"
 export default function Login() {
   const [userData,setUserData] =useState({
   email:"",
@@ -12,6 +13,7 @@ export default function Login() {
   })
   const [error,setError]=useState(false)
   const [loading,setLoading] =useState(false)
+  const cookie = Cookie()
   const nav = useNavigate()
   function fillForm(e){
 const name=e.target.name
@@ -24,7 +26,9 @@ setUserData({...userData,[name]:value})
 setLoading(true)
 try{
   const res= await axios.post("http://localhost:5000/auth/login",userData)
-  console.log(res.data)
+  cookie.set("access",res.data.accessToken)
+  cookie.set("refresh",res.data.refreshToken)
+  cookie.set("role",res.data.role)
   nav("/")
 }
 catch(err){
@@ -34,7 +38,7 @@ finally{
   setLoading(false)
 }
   }
-  
+  cookie.set("aya","karam")
   return (
     loading?<h1>loading</h1>: <div className="scroll-bar bg-white">
       <div className="hidden md:block">

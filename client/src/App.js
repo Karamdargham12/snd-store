@@ -11,9 +11,12 @@ import Accounts from './Pages/Dashboard/Accounts';
 function App() {
   return (
     <Routes>
+      // Global Routes
      <Route path="/" element={<HomePage />} />
      <Route path="/register" element={<Register />} />
      <Route path="/login" element={<Login />} />
+
+     // Protected Routes
      <Route path="/dashboard" element={<Dashboard />} >
       <Route path="products" element={<Products/>}/>
       <Route path="accounts" element={<Accounts/>}/>
