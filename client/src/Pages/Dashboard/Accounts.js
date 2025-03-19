@@ -5,11 +5,17 @@ import Cookie from "cookie-universal"
 export default function Accounts(){
     const [users,setUsers] = useState([])
     const [loading,setLoading] = useState(false)
+    const cookie = Cookie()
+    const accessToken = cookie.get("access")
 
     async function getUsers(){
         setLoading(true)
         try{
-            let res = await axios.get("http://localhost:5000/users")
+            let res = await axios.get("http://localhost:5000/users",{
+                headers:{
+                    Authorization:accessToken
+                }
+            })
             setUsers(res.data)
         }catch(err){
            console.log(err)

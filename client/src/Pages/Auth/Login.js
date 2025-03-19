@@ -31,7 +31,6 @@ try{
   const res= await axios.post("http://localhost:5000/auth/login",userData)
   cookie.set("access",res.data.accessToken)
   cookie.set("refresh",res.data.refreshToken)
-context.setUser({role:res.data.role})
   res.data.role==="admin" ? nav("/dashboard") : nav("/")
 }
 catch(err){
