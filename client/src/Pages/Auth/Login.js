@@ -3,14 +3,17 @@ import MobileNavBar from "../../Components/Website/MobileNavBar";
 import NavBar from "../../Components/Website/NavBar";
 import loginImg from "../../images/login.jpg";
 import "react-phone-input-2/lib/style.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import Cookie from "cookie-universal"
+import { User } from "../../Context/UserContext"
 export default function Login() {
   const [userData,setUserData] =useState({
   email:"",
   password:""
   })
+  const context=useContext(User)
+
   const [error,setError]=useState(false)
   const [loading,setLoading] =useState(false)
   const cookie = Cookie()
@@ -28,8 +31,8 @@ try{
   const res= await axios.post("http://localhost:5000/auth/login",userData)
   cookie.set("access",res.data.accessToken)
   cookie.set("refresh",res.data.refreshToken)
-  cookie.set("role",res.data.role)
-  nav("/")
+context.setUser({role:res.data.role})
+  res.data.role==="admin" ? nav("/dashboard") : nav("/")
 }
 catch(err){
 setError(true)
