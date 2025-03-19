@@ -6,6 +6,7 @@ const PORT = 5000
 const app = express()
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
+const infoRoutes = require('./routes/infoRoutes');
 
 app.use(cors({
   origin: "http://localhost:3000",
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
+app.use('/info', infoRoutes);
 app.get("/",(req,res)=>{
   res.send("Welcome to SND Store")
 })

@@ -4,7 +4,7 @@ export const User = createContext({})
 
 export default function UserProvider({ children }) {
      const [user,setUser] = useState({
-        role:""
+        role:"",
      })
 
     return (
