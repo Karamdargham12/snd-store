@@ -6,8 +6,9 @@ import Login from "./Pages/Auth/Login"
 import Register from './Pages/Auth/Register';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Products from './Pages/Dashboard/Products';
-import Accounts from './Pages/Dashboard/Accounts';
+import Accounts from './Pages/Dashboard/Accounts/Accounts';
 import RequireAuth from './Pages/Auth/RequireAuth'
+import EditUser from './Pages/Dashboard/Accounts/EditUser';
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
      <Route element={<RequireAuth/>} >
      <Route path="/dashboard" element={<Dashboard />} >
       <Route path="products" element={<Products/>}/>
-      <Route path="accounts" element={<Accounts/>}/>
+      <Route path="accounts" element={<Accounts/>} />
+      <Route path="accounts/:id" element={<EditUser />} />
      </Route>
      </Route>
     </Routes>
