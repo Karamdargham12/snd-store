@@ -7,6 +7,7 @@ const app = express()
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const infoRoutes = require('./routes/infoRoutes');
+const categoryRoutes = require('./routes/categoryRoutes')
 
 app.use(cors({
   origin: "http://localhost:3000",
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/info', infoRoutes);
+app.use('/categories',categoryRoutes)
 app.get("/",(req,res)=>{
   res.send("Welcome to SND Store")
 })

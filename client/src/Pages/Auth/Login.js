@@ -40,7 +40,6 @@ finally{
   setLoading(false)
 }
   }
-  cookie.set("aya","karam")
   return (
     loading?<h1>loading</h1>: <div className="scroll-bar bg-white">
       <div className="hidden md:block">

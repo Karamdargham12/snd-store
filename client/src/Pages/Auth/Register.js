@@ -36,7 +36,7 @@ async function formSubmit(e){
     const response = await axios.post("http://localhost:5000/auth/register", finalUserData,{
       headers: { "Content-Type": "application/json" }
     });
-    nav("/")
+    nav("/login")
   } catch (error) {
     
   } finally {

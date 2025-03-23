@@ -24,6 +24,24 @@ export default function Accounts() {
       setLoading(false);
     }
   }
+  async function deleteUser(id) {
+    setLoading(true)
+     try{
+      let res = await axios.delete(`http://localhost:5000/users/${id}`, {
+        headers: {
+          Authorization: accessToken,
+        },
+      });
+      let deleteFromArray = users.filter((user,i)=>user._id!== id)
+       setUsers(deleteFromArray)
+     }
+     catch(e){
+      console.log(e)
+     }
+     finally{
+       setLoading(false)
+     }
+  }
 
   useEffect(() => {
     getUsers();
@@ -60,7 +78,7 @@ export default function Accounts() {
                 <Link to={`/dashboard/accounts/${user._id}`} className="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600">
                   Edit
                 </Link>
-                <button className="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600 ml-2">
+                <button onClick={()=>deleteUser(user._id)} className="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600 ml-2">
                   Delete
                 </button>
               </td>
