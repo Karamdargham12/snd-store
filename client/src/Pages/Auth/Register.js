@@ -9,42 +9,47 @@ import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [phone, setPhone] = useState("");
-  const [loading,setLoading] = useState(false)
-  const [userData,setUserData] = useState({
-    name:"",
-    email:"",
-    password:"",
-    location:"",
-    phone:""
-  })
-  const nav=useNavigate()
-  function fillForm(e){
-    const name = e.target.name
-    const value = e.target.value
-    setUserData({...userData,[name]:value})
-}
-async function formSubmit(e){
-  e.preventDefault();
-  setLoading(true);
-
-  const finalUserData = {
-    ...userData,
-    phone: phone 
-  };
-
-  try {
-    const response = await axios.post("http://localhost:5000/auth/register", finalUserData,{
-      headers: { "Content-Type": "application/json" }
-    });
-    nav("/login")
-  } catch (error) {
-    
-  } finally {
-    setLoading(false);
+  const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    location: "",
+    phone: "",
+  });
+  const nav = useNavigate();
+  function fillForm(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    setUserData({ ...userData, [name]: value });
   }
-}
-  return (
-   loading?<p>Loading....</p> :<div className="scroll-bar bg-white">
+  async function formSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+
+    const finalUserData = {
+      ...userData,
+      phone: phone,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/auth/register",
+        finalUserData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      nav("/login");
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  }
+  return loading ? (
+    <p>Loading....</p>
+  ) : (
+    <div className="scroll-bar bg-white">
       <div className="hidden md:block">
         <NavBar />
       </div>
@@ -60,7 +65,10 @@ async function formSubmit(e){
               alt="Register"
             />
           </div>
-          <form onSubmit={formSubmit} className="lg:col-span-5 col-span-12 lg:col-start-8 pt-10 mt-3 lg:mt-0 bg-gray-700/60 lg:rounded-l-[6rem] lg:rounded-tr-none rounded-t-xl">
+          <form
+            onSubmit={formSubmit}
+            className="lg:col-span-5 col-span-12 lg:col-start-8 pt-10 mt-3 lg:mt-0 bg-gray-700/60 lg:rounded-l-[6rem] lg:rounded-tr-none rounded-t-xl"
+          >
             <div className="w-full flex justify-center items-center">
               <div className="w-3/4">
                 <h1 className="text-4xl text-center text-white font-extrabold">
@@ -107,7 +115,7 @@ async function formSubmit(e){
                     onChange={setPhone}
                     inputClass="!w-full !h-9 !rounded-md !outline-none "
                     containerClass="!w-full !flex !items-center"
-                    buttonStyle={{paddingLeft:"3px"}}
+                    buttonStyle={{ paddingLeft: "3px" }}
                   />
                 </div>
                 <div className="input-box mt-8 flex items-center border-2 gap-x-2 bg-white">
@@ -122,7 +130,7 @@ async function formSubmit(e){
                   />
                 </div>
                 <div className="w-full mt-8">
-                <div className="flex justify-center">
+                  <div className="flex justify-center">
                     <button
                       type="submit"
                       className="w-1/2 bg-primaryColor rounded p-2 font-semibold text-white"

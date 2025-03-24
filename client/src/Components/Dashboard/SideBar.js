@@ -9,7 +9,7 @@ export default function SideBar(){
   };
 
   return (
-    <aside className={`bg-white shadow-md h-screen p-4 border-r border-gray-200 transition-all duration-300 ${isMinimized ? 'w-20' : 'w-64'}`}>
+    <aside className={`bg-white shadow-md p-4 border-r border-gray-200 transition-all duration-300 ${isMinimized ? 'w-20' : 'w-64'}`}>
       <div className="mb-6 flex justify-between items-center">
         <a href="index.html" className={`text-2xl font-bold text-gray-700 transition-opacity duration-300 ${isMinimized ? 'hidden' : 'block'}`}>SND Shop</a>
         <button onClick={toggleSidebar} className="btn btn-icon btn-aside-minimize">
@@ -34,9 +34,9 @@ export default function SideBar(){
             </a>
           </li>
           <li>
-            <a href="page-sellers-cards.html" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">
-              <span className="mdi mdi-store text-lg mr-3"></span> <span className={`${isMinimized ? 'hidden' : 'inline'}`}>Sellers</span>
-            </a>
+            <Link to="/dashboard/categories" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">
+              <span className="mdi mdi-file-tree text-lg mr-3"></span> <span className={`${isMinimized ? 'hidden' : 'inline'}`}>Categories</span>
+            </Link>
           </li>
           <li>
             <a href="page-transactions-1.html" className="flex items-center p-3 text-gray-700 hover:bg-gray-100 rounded-md font-medium">

@@ -9,6 +9,7 @@ import Products from './Pages/Dashboard/Products';
 import Accounts from './Pages/Dashboard/Accounts/Accounts';
 import RequireAuth from './Pages/Auth/RequireAuth'
 import EditUser from './Pages/Dashboard/Accounts/EditUser';
+import Categories from './Pages/Dashboard/Categories/Categories';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path="products" element={<Products/>}/>
       <Route path="accounts" element={<Accounts/>} />
       <Route path="accounts/:id" element={<EditUser />} />
+      <Route path="categories" element={<Categories />} />
      </Route>
      </Route>
     </Routes>

@@ -80,7 +80,7 @@ export default function HomePage() {
                 <div className="p-4">
                   <div className="image ">
                     <a href="shop-grid.html" className="flex justify-center">
-                      <img src={category.img} alt={category.name} className="w-24 h-24" />
+                      <img src={category.img} alt={category.name} className="w-24 h-24 " />
                     </a>
                   </div>
                   <div className="text-info p-4 text-center">
