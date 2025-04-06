@@ -10,6 +10,8 @@ import Accounts from './Pages/Dashboard/Accounts/Accounts';
 import RequireAuth from './Pages/Auth/RequireAuth'
 import EditUser from './Pages/Dashboard/Accounts/EditUser';
 import Categories from './Pages/Dashboard/Categories/Categories';
+import AddCategory from './Pages/Dashboard/Categories/AddCategory'
+import EditCategory from './Pages/Dashboard/Categories/EditCategory';
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
       <Route path="accounts" element={<Accounts/>} />
       <Route path="accounts/:id" element={<EditUser />} />
       <Route path="categories" element={<Categories />} />
+      <Route path="addCategory" element={<AddCategory />} />
+      <Route path="categories/:id" element={<EditCategory />} />
      </Route>
      </Route>
     </Routes>

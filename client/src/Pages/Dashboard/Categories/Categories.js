@@ -50,24 +50,35 @@ export default function Categories() {
     <p>loading...</p>
   ) : (
     <div className="p-6 bg-white shadow-md rounded-lg w-full  h-full">
+      <div className="w-full flex justify-between  md:flex-row flex-col">
       <h2 className="text-xl font-semibold text-gray-800 mb-4">Categories</h2>
+      <Link to="/dashboard/addCategory" className="w-28 h-8 bg-secondaryColor flex justify-center items-center rounded-md text-lg text-center text-white">Add <span class="mdi mdi-plus pt-1"></span></Link>
+      </div>
 
       <div className="overflow-x-auto md:flex hidden">
         <table className="w-full border-collapse">
           <thead className="bg-gray-100 text-gray-700 uppercase text-sm">
             <tr>
+              <th className="p-3 text-left border-b">Image</th>
               <th className="p-3 text-left border-b">Name</th>
+              <th className="p-3 text-left border-b">Page URL</th>
               <th className="p-3 border-b text-center">Actions</th>
             </tr>
           </thead>
-
+         
           <tbody>
-            {categories.map((category,i)=><tr className="border-b hover:bg-gray-50 ">
+            {categories.length!==0 &&categories.map((category,i)=><tr className="border-b hover:bg-gray-50 ">
+              <td className="p-3">
+                <img src={`http://localhost:5000${category.imageUrl}`} alt={category.name} className="w-8" />
+              </td>
               <td className="p-3">
                 {category.name}
               </td>
+              <td className="p-3">
+                {category.url}
+              </td>
               <td className="p-3 text-center">
-                <Link to={`/dashboard/accounts/${category._id}`} className="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600">
+                <Link to={`/dashboard/categories/${category._id}`} className="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600">
                   Edit
                 </Link>
                 <button onClick={()=>deleteCategory(category._id)} className="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600 ml-2">
@@ -79,15 +90,20 @@ export default function Categories() {
           </tbody>
         </table>
       </div>
-      <div className=" md:hidden flex h-full">
-        <div className="w-full">
+      <div className=" md:hidden flex h-full justify-center items-center">
+        <div className="w-full flex justify-center items-center">
           <div className="">
-            {categories.map((category,i)=><div className="border-b hover:bg-gray-50 ">
+            {categories.length!==0 &&categories.map((category,i)=><div className="border-b hover:bg-gray-50 ">
+              <hr className="mt-4"></hr>
               <h3 className="p-3">
                Name: {category.name}
               </h3>
+              <h3 className="p-3">
+               Page Url: {category.url}
+              </h3>
+              <img src={`http://localhost:5000${category.imageUrl}`} alt={category.name} className="w-20"/>
               <h3 className="p-3 text-center">
-                <Link to={`/dashboard/accounts/${category._id}`} className="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600">
+                <Link to={`/dashboard/categories/${category._id}`} className="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600">
                   Edit
                 </Link>
                 <button onClick={()=>deleteCategory(category._id)} className="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600 ml-2">

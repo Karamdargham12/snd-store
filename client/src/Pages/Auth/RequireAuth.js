@@ -5,7 +5,6 @@ import Cookie from "cookie-universal"
 import axios from "axios"
 
 export default function RequireAuth(){
-    const [role, setRole] = useState("")
     const [loading, setLoading] = useState(true) // Start with loading as true
     const cookie = Cookie()
     const access = cookie.get('access')
@@ -21,7 +20,6 @@ export default function RequireAuth(){
             context.setUser({
                 role: res.data.role
             })
-            setRole(res.data.role)
         } catch (err) {
             console.log(err)
         } finally {
@@ -38,5 +36,5 @@ export default function RequireAuth(){
         return <p>Loading...</p>
     }
 
-    return role === "admin" ? <Outlet /> : <Navigate state={{ from: location }} replace to="/login" />
+    return access ? <Outlet /> : <Navigate state={{ from: location }} replace to="/login" />
 }

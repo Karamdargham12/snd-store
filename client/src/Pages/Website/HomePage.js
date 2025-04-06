@@ -2,28 +2,34 @@ import MobileNavBar from "../../Components/Website/MobileNavBar";
 import NavBar from "../../Components/Website/NavBar";
 import "swiper/css";
 import Header1 from "../../images/Hero.jpg";
-import { useContext } from "react";
-import { User } from "../../Context/UserContext";
-export default function HomePage() {
-  const categories = [
-    { name: "Laptops", items: 1025, img: require("../../images/Categories/1.png") },
-    { name: "Earphones", items: 2185, img: require("../../images/Categories/2.png") },
-    { name: "Mouses", items: 635, img: require("../../images/Categories/3.png") },
-    { name: "Keyboards", items: 965, img: require("../../images/Categories/4.png") },
-    { name: "Routers", items: 1254, img: require("../../images/Categories/5.png") },
-    { name: "Networks", items: 325, img: require("../../images/Categories/6.jpg") },
-    { name: "Cables", items: 3256, img: require("../../images/Categories/7.png") },
-    { name: "Cameras", items: 9658, img: require("../../images/Categories/8.png") },
-    { name: "Batteries", items: 2356, img: require("../../images/Categories/9.png") },
-    { name: "Laptop Accessories", items: 325, img: require("../../images/Categories/10.png") },
-  ];
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-  const context = useContext(User);
-  var aya = "jsaoidjsa";
+export default function HomePage() {
+    const [loading,setLoading] = useState(true)
+    const [error,setError] = useState(false)
+    const [categories,setCategories] = useState([])
+  async function getCategories() {
+    try{
+      let res = await axios.get("http://localhost:5000/categories");
+      setCategories(res.data)
+    }
+    catch{
+      setError(true)
+    }
+    finally{
+      setLoading(false)
+    }
+  }
+  useEffect(()=>{
+    getCategories()
+  },[])
+
   return (
-    <div className="scroll-bar">
+    loading?<p>loading...</p>:<div className="scroll-bar">
       <div className="hidden md:block">
-        <NavBar />
+        <NavBar categories={categories} />
       </div>
       <div className="md:hidden">
         <MobileNavBar />
@@ -68,7 +74,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <section className="mt-24">
+      {error ?<p>failed to load categories</p> :<section className="mt-24">
       <div className="container mx-auto">
         <div className="text-center border-b-0">
           <h4 className="text-secondaryColor/70 text-3xl font-bold">Most Popular Categories</h4>
@@ -76,24 +82,24 @@ export default function HomePage() {
         <div className="mt-10 flex justify-center">
           <ul className="grid md:grid-cols-4 gap-4 w-[90%]">
             {categories.map((category, index) => (
-              <li key={index} className={`animate__animated animate__fadeIn flex justify-center items-center border border-secondaryColor/20 hover:shadow-lg transition-shadow duration-300`} style={{ animationDelay: `${index * 0.1}s` }} >
+              <Link key={index} to={`${category.url}`}><li  className={`animate__animated animate__fadeIn flex justify-center items-center border border-secondaryColor/20 hover:shadow-lg transition-shadow duration-300`} style={{ animationDelay: `${index * 0.1}s` }} >
                 <div className="p-4">
                   <div className="image ">
-                    <a href="shop-grid.html" className="flex justify-center">
-                      <img src={category.img} alt={category.name} className="w-24 h-24 " />
-                    </a>
+                    <div className="flex justify-center">
+                      <img src={`http://localhost:5000${category.imageUrl}`} alt={category.name} className="w-24 h-24 " />
+                    </div>
                   </div>
                   <div className="text-info p-4 text-center">
-                    <a className="text-sm text-gray-900 font-bold text-center" href="shop-grid.html">{category.name}</a>
-                    <p className="text-xs text-gray-500 text-center">{category.items}</p>
+                    <h3 className="text-sm text-gray-900 font-bold text-center">{category.name}</h3>
                   </div>
                 </div>
               </li>
+              </Link>
             ))}
           </ul>
         </div>
       </div>
-    </section>
+    </section>}
     </div>
   );
 }

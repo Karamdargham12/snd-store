@@ -1,10 +1,20 @@
 const express = require('express');
-
+const multer = require('multer');
 const Category = require('../models/Category');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, `${Date.now()}-${file.originalname}`);
+    },
+});
+
+const upload = multer({ storage });
 
 router.get('/', async (req, res) => {
     try {
@@ -15,9 +25,10 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', authMiddleware(['admin']), async (req, res) => {
-    const { name } = req.body;
-    const category = new Category({ name });
+router.post('/', authMiddleware(['admin']),upload.single('image'),async (req, res) => {
+    
+    const { name,url } = req.body;
+    const category = new Category({ name,url,imageUrl: req.file ? `/uploads/${req.file.filename}` : null, });
 
     try {
         await category.save();
@@ -26,9 +37,13 @@ router.post('/', authMiddleware(['admin']), async (req, res) => {
         res.status(400).send(err.message);
     }
 });
-router.put('/:id',authMiddleware(['admin']),async (req, res) => {
+router.put('/:id',authMiddleware(['admin']),upload.single('image'),async (req, res) => {
         const { id } = req.params;
         const updates = req.body;
+
+        if (req.file) {
+            updates.imageUrl = `/uploads/${req.file.filename}`;
+        }
         try {
             const category = await Category.findByIdAndUpdate(id, updates, { new: true });
             if (!category) {
