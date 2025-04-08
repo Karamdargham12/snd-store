@@ -7,15 +7,10 @@ const productSchema = new Schema({
     price: { type: Number, required: true },
     category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
     stock: { type: Number, required: true },
-    imagesUrl : {
-        0 : String,
-        1 : String,
-        2 : String,
-        3 : String,
-    }
+    imagesUrl: [{ type: String }]
 });
 
 productSchema.index({ name: 1 });
 
-module.exports = mongoose.model('Medicine', productSchema);
+module.exports = mongoose.model('Product', productSchema);
 

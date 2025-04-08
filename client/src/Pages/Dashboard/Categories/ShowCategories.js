@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Cookie from "cookie-universal";
 import { Link } from "react-router-dom";
 
-export default function Categories() {
+export default function ShowCategories() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const cookie = Cookie();

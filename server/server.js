@@ -8,6 +8,7 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const infoRoutes = require('./routes/infoRoutes');
 const categoryRoutes = require('./routes/categoryRoutes')
+const productRoutes = require('./routes/productRoutes')
 const path = require('path');
 
 app.use(cors({
@@ -21,6 +22,7 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/info', infoRoutes);
 app.use('/categories',categoryRoutes)
+app.use('/products',productRoutes)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.get("/",(req,res)=>{
   res.send("Welcome to SND Store")

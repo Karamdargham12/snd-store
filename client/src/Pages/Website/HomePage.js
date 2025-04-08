@@ -10,6 +10,7 @@ export default function HomePage() {
     const [loading,setLoading] = useState(true)
     const [error,setError] = useState(false)
     const [categories,setCategories] = useState([])
+    const [products,setProducts] = useState([])
   async function getCategories() {
     try{
       let res = await axios.get("http://localhost:5000/categories");
@@ -22,14 +23,29 @@ export default function HomePage() {
       setLoading(false)
     }
   }
+
+  async function getProducts() {
+    try{
+      let res = await axios.get("http://localhost:5000/products");
+      let slice = res.data.slice(0,11)
+      setProducts(slice)
+    }
+    catch{
+      setError(true)
+    }
+    finally{
+      setLoading(false)
+    }
+  }
   useEffect(()=>{
     getCategories()
+    getProducts()
   },[])
 
   return (
     loading?<p>loading...</p>:<div className="scroll-bar">
       <div className="hidden md:block">
-        <NavBar categories={categories} />
+        <NavBar />
       </div>
       <div className="md:hidden">
         <MobileNavBar />
@@ -74,32 +90,59 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {error ?<p>failed to load categories</p> :<section className="mt-24">
-      <div className="container mx-auto">
-        <div className="text-center border-b-0">
-          <h4 className="text-secondaryColor/70 text-3xl font-bold">Most Popular Categories</h4>
-        </div>
-        <div className="mt-10 flex justify-center">
-          <ul className="grid md:grid-cols-4 gap-4 w-[90%]">
-            {categories.map((category, index) => (
-              <Link key={index} to={`${category.url}`}><li  className={`animate__animated animate__fadeIn flex justify-center items-center border border-secondaryColor/20 hover:shadow-lg transition-shadow duration-300`} style={{ animationDelay: `${index * 0.1}s` }} >
-                <div className="p-4">
-                  <div className="image ">
-                    <div className="flex justify-center">
-                      <img src={`http://localhost:5000${category.imageUrl}`} alt={category.name} className="w-24 h-24 " />
+      {error ?<p>failed to load categories</p> :<section className="mt-36">
+        <div className="container mx-auto">
+          <div className="text-center border-b-0">
+            <h4 className="text-secondaryColor/70 text-3xl font-bold pt-10">Most Popular Categories</h4>
+          </div>
+          <div className="mt-10 flex justify-center">
+            <ul className="grid md:grid-cols-4 gap-4 w-[90%]">
+              {categories.map((category, index) => (
+                <Link key={index} to={`/categories/${category.name}`}><li  className={`animate__animated animate__fadeIn flex justify-center items-center border border-secondaryColor/20 hover:shadow-lg transition-shadow duration-300`} style={{ animationDelay: `${index * 0.1}s` }} >
+                  <div className="p-4">
+                    <div className="image ">
+                      <div className="flex justify-center">
+                        <img src={`http://localhost:5000${category.imageUrl}`} alt={category.name} className="w-24 h-24 " />
+                      </div>
+                    </div>
+                    <div className="text-info p-4 text-center">
+                      <h3 className="text-sm text-gray-900 font-bold text-center">{category.name}</h3>
                     </div>
                   </div>
-                  <div className="text-info p-4 text-center">
-                    <h3 className="text-sm text-gray-900 font-bold text-center">{category.name}</h3>
-                  </div>
-                </div>
-              </li>
-              </Link>
-            ))}
-          </ul>
+                </li>
+                </Link>
+              ))}
+            </ul>
+          </div>
         </div>
-      </div>
-    </section>}
+      </section>}
+      <section className="mt-36">
+        <div className="container mx-auto">
+          <div className="text-center border-b-0">
+            <h4 className="text-secondaryColor/70 text-3xl font-bold pt-10">Most Popular Products</h4>
+          </div>
+          <div className="mt-10 flex justify-center">
+            <ul className="grid md:grid-cols-4 gap-4 w-[90%]">
+              {products.map((product, index) => (
+                <Link key={index} to={`/products/${product._id}`}><li  className={`animate__animated animate__fadeIn flex justify-center items-center border border-secondaryColor/20 hover:shadow-lg transition-shadow duration-300`} style={{ animationDelay: `${index * 0.1}s` }} >
+                  <div className="p-4">
+                    <div className="image ">
+                      <div className="flex justify-center">
+                        <img src={product.imagesUrl!==null?`http://localhost:5000${product.imagesUrl[0]}`:""} alt={product.name} className="w-36 h-24 " />
+                      </div>
+                    </div>
+                    <div className="text-info p-4 text-center">
+                      <h3 className="text-sm text-gray-900 font-bold text-center">{product.name}</h3>
+                    </div>
+                  </div>
+                </li>
+                </Link>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+      <div className="pt-24"></div>
     </div>
   );
 }

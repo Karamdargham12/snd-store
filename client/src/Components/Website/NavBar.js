@@ -1,11 +1,25 @@
 import { Link } from "react-router-dom";
 import Logo from "../../images/logo.png";
 import Cookie from "cookie-universal";
-import { useState } from "react";
-export default function NavBar(props) {
+import { useEffect, useState } from "react";
+import axios from "axios";
+export default function NavBar() {
   const cookie = Cookie();
   const accessToken = cookie.get("access");
   const [showCategories, setShowCategories] = useState(false);
+  const [categories,setCategories] = useState([])
+  async function getCategories() {
+    try{
+      let res = await axios.get("http://localhost:5000/categories");
+      setCategories(res.data)
+    }
+    catch{
+     
+    }
+  }
+  useEffect(()=>{
+    getCategories()
+  },[])
   return (
     <header className="fixed w-full top-0 bg-white shadow-md z-50">
       <div className="container mx-auto px-4">
@@ -56,10 +70,10 @@ export default function NavBar(props) {
           </button>
           {showCategories && (
             <div className="absolute top-[100%]  left-[17.3%] rounded -translate-x-1/2 -translate-y-1/6 z-50 bg-slate-100 w-1/6 p-2">
-              {props.categories.map((category, index) => (
+              {categories.map((category, index) => (
                 <Link
                   key={index}
-                  to={`${category.url}`}
+                  to={`/categories/${category.name}`}
                   className="block py-2 px-4 text-center text-gray-700"
                 >
                   {category.name}
